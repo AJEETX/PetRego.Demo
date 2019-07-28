@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PetRego.Demo.Domain;
 using PetRego.Demo.Helper;
 
 namespace PetRego.Demo
@@ -28,6 +29,8 @@ namespace PetRego.Demo
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPetRegoService, PetRegoService>();
+            services.AddScoped<ILinkService, LinkService>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory => new UrlHelper(factory.GetService<IActionContextAccessor>().ActionContext));
             services.AddApiVersioning(o => {

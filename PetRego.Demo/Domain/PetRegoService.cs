@@ -1,4 +1,5 @@
-﻿using PetRego.Demo.Model;
+﻿using PetRego.Demo.Helper;
+using PetRego.Demo.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace PetRego.Demo.Domain
     {
         public IEnumerable<PetOwner> GetPetOwners()
         {
-            return new List<PetOwner> { };
+            return SampleData.Owners;
         }
     }
 }

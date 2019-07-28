@@ -13,9 +13,11 @@ namespace PetRego.Demo.Controllers
     public class PetOwnerController : Controller
     {
         readonly IPetRegoService _petRegoService;
-        public PetOwnerController(IPetRegoService petRegoService)
+        readonly ILinkService _linkService;
+        public PetOwnerController(IPetRegoService petRegoService,ILinkService linkService)
         {
             _petRegoService = petRegoService;
+            _linkService = linkService;
         }
         [HttpGet(Name = "GetPetOwners"), MapToApiVersion("1.0")]
         public IActionResult Get()
@@ -23,14 +25,13 @@ namespace PetRego.Demo.Controllers
             try
             {
                 IEnumerable<PetOwner> petOwners = _petRegoService.GetPetOwners();
+                var response = petOwners.Select(p => _linkService.GetLink(p));
+                return Ok(response);
             }
-            catch (Exception)
+            catch (System.Exception)
             {
-
-                throw;
+                return StatusCode(500);//Shout//yell//log;
             }
-            
-            return Ok();
         }
 
         [HttpGet("{id}")]
