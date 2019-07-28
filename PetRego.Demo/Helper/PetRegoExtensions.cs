@@ -43,11 +43,15 @@ namespace PetRego.Demo.Helper
             services.AddScoped<ILinkService, LinkService>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory => new UrlHelper(factory.GetService<IActionContextAccessor>().ActionContext));
+            services.AddMvcCore().AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
             services.AddApiVersioning(o =>
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
                 o.DefaultApiVersion = new ApiVersion(1, 0);
-                o.ApiVersionReader = new HeaderApiVersionReader("version");
             });
             services.AddMvcCore().AddVersionedApiExplorer(options => options.SubstituteApiVersionInUrl = true);
             services.AddSwaggerGen(options =>
@@ -62,12 +66,15 @@ namespace PetRego.Demo.Helper
             return services;
 
         }
+
         public static IApplicationBuilder UsePetRegoService(this IApplicationBuilder app, IApiVersionDescriptionProvider provider)
         {
             app.UseMvc().UseSwagger().UseSwaggerUI(options =>
             {
                 foreach (var description in provider.ApiVersionDescriptions)
+                {
                     options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", "Version " + description.GroupName.ToUpperInvariant());
+                }
             });
             return app;
         }

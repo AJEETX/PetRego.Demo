@@ -41,7 +41,7 @@ namespace PetRego.Demo.Test
             var sut = new PetOwnersController( moqPetService.Object, moqLinkService.Object);
 
             //when
-            var result = sut.GetOwnerPet(petOwnerId);
+            var result = sut.Get(petOwnerId);
             OkObjectResult objectResult = result as OkObjectResult;
             Link<PetOwner<Pet>> owners = objectResult.Value as Link<PetOwner<Pet>>;
 
@@ -60,7 +60,7 @@ namespace PetRego.Demo.Test
             var sut = new PetOwnersController(moqPetService.Object, moqLinkService.Object);
 
             //when
-            var result = sut.GetOwnerPet(petOwnerId);
+            var result = sut.Get(petOwnerId);
             StatusCodeResult objectResult = result as StatusCodeResult;
 
             //then

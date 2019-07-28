@@ -8,7 +8,7 @@ using Swashbuckle.AspNetCore.Examples;
 namespace PetRego.Demo.Controllers.V2
 {
     [ApiVersion("2.0")]
-    [Route("api/[controller]")]
+    [Route("api/v{v:apiVersion}/[controller]")]
     public class PetOwnersController : Controller
     {
         readonly IPetRegoService _petRegoService;
@@ -21,7 +21,7 @@ namespace PetRego.Demo.Controllers.V2
 
         [HttpGet("{id}", Name = "getPetOwnerAndFood")]
         [SwaggerResponseExample(200, typeof(Sample2Data))]
-        public IActionResult GetOwnerPetFood(int id)
+        public IActionResult Get(int id)
         {
             try
             {
