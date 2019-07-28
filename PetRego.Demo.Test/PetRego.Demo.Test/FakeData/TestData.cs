@@ -5,18 +5,18 @@ namespace PetRego.Demo.Test.FakeData
 {
     static class TestData
     {
-        public static List<PetOwner<Pet>> GetOwners
+        public static List<PetOwner<PetBasicDetail>> GetOwners
         {
             get
             {
-                return new List<PetOwner<Pet>> { Owner };
+                return new List<PetOwner<PetBasicDetail>> { Owner };
             }
         }
-        public static PetOwner<Pet> Owner
+        public static PetOwner<PetBasicDetail> Owner
         {
             get
             {
-                return new PetOwner<Pet>
+                return new PetOwner<PetBasicDetail>
                 {
                     Id = 1,
                     Name = "Owner1",
@@ -24,18 +24,18 @@ namespace PetRego.Demo.Test.FakeData
                 };
             }
         }
-        public static List<Pet> GetPets
+        public static List<PetBasicDetail> GetPets
         {
             get
             {
-                return new List<Pet> { Pet };
+                return new List<PetBasicDetail> { Pet };
             }
         }
-        public static Pet Pet
+        public static PetBasicDetail Pet
         {
             get
             {
-                return new Pet
+                return new PetBasicDetail
                 {
                     Name = "Doggy"
                 };
@@ -53,14 +53,14 @@ namespace PetRego.Demo.Test.FakeData
         //        };
         //    }
         //}
-        public static Link<PetOwner<Pet>> GetLinksWrapper
+        public static Link<PetOwner<PetBasicDetail>> GetLinksWrapper
         {
             get
             {
-                return new Link<PetOwner<Pet>>
+                return new Link<PetOwner<PetBasicDetail>>
                 {
                     Links = new List<LinkInfo> { GetLinkInfo },
-                    Value = GetOwnerModel
+                    Data = GetOwnerModel
                 };
             }
         }
@@ -71,11 +71,11 @@ namespace PetRego.Demo.Test.FakeData
                 return new LinkInfo { Href = "Href", Method = "Method", Rel = "Rel" };
             }
         }
-        public static PetOwner<Pet> GetOwnerModel
+        public static PetOwner<PetBasicDetail> GetOwnerModel
         {
             get
             {
-                return new PetOwner<Pet>
+                return new PetOwner<PetBasicDetail>
                 {
                     Name = "Owner1",
                     Pets = GetPets

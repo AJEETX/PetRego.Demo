@@ -16,13 +16,13 @@ namespace PetRego.Demo.Test
             var input = TestData.Owner;
             var moqlUrlHelper = new Mock<IUrlHelper>();
             moqlUrlHelper.Setup(m => m.Link(It.IsAny<string>(), It.IsAny<object>())).Returns("TestUrl").Verifiable();
-            var sut = new LinkService(moqlUrlHelper.Object);
+            var sut = new LinkService<PetBasicDetail>(moqlUrlHelper.Object);
 
             //when
             var result = sut.GetLink(input);
 
             //then
-            Assert.IsType<Link<PetOwner<Pet>>>(result);
+            Assert.IsType<Link<PetOwner<PetBasicDetail>>>(result);
             moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(1));
         }
         //[Fact]

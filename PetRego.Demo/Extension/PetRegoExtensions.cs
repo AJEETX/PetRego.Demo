@@ -3,15 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 using PetRego.Demo.Domain;
 using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PetRego.Demo.Extension
 {
@@ -40,7 +35,7 @@ namespace PetRego.Demo.Extension
         public static IServiceCollection AddPetRegoService(this IServiceCollection services)
         {
             services.AddScoped<IPetRegoService, PetRegoService>();
-            services.AddScoped<ILinkService, LinkService>();
+            services.AddScoped(typeof(ILinkService<>),typeof(LinkService<>));
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory => new UrlHelper(factory.GetService<IActionContextAccessor>().ActionContext));
             services.AddMvcCore().AddVersionedApiExplorer(options =>

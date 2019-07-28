@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PetRego.Demo.V1.Models
 {
@@ -13,7 +10,7 @@ namespace PetRego.Demo.V1.Models
     }
     public class Link<T>
     {
-        public T Value { get; set; }
+        public T Data { get; set; }
         public List<LinkInfo> Links { get; set; }
     }
 }

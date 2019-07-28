@@ -14,11 +14,11 @@ namespace PetRego.Demo.Test
     public class PetOwnerControllerTest:IDisposable
     {
         Mock<IPetRegoService> moqPetService;
-        Mock<ILinkService> moqLinkService;
+        Mock<ILinkService<PetBasicDetail>> moqLinkService;
         public PetOwnerControllerTest()
         {
             moqPetService = new Mock<IPetRegoService>();
-            moqLinkService = new Mock<ILinkService>();
+            moqLinkService = new Mock<ILinkService<PetBasicDetail>>();
         }
 
         public void Dispose()
@@ -33,13 +33,13 @@ namespace PetRego.Demo.Test
             //given
             int petOwnerId = 1;
             moqPetService.Setup(m => m.GetPetOwnerAndPet(It.IsAny<int>())).Returns(SampleData.Owners.FirstOrDefault());
-            moqLinkService.Setup(m => m.GetLink(It.IsAny<PetOwner<Pet>>())).Returns(TestData.GetLinksWrapper);
+            moqLinkService.Setup(m => m.GetLink(It.IsAny<PetOwner<PetBasicDetail>>())).Returns(TestData.GetLinksWrapper);
             var sut = new PetOwnersController( moqPetService.Object, moqLinkService.Object);
 
             //when
             var result = sut.Get(petOwnerId);
             OkObjectResult objectResult = result as OkObjectResult;
-            Link<PetOwner<Pet>> owners = objectResult.Value as Link<PetOwner<Pet>>;
+            Link<PetOwner<PetBasicDetail>> owners = objectResult.Value as Link<PetOwner<PetBasicDetail>>;
 
             //then
             Assert.NotNull(result);

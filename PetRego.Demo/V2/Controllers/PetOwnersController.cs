@@ -12,8 +12,8 @@ namespace PetRego.Demo.V2.Controllers
     public class PetOwnersController : Controller
     {
         readonly IPetRegoService _petRegoService;
-        readonly ILinkService _linkService;
-        public PetOwnersController(IPetRegoService petRegoService, ILinkService linkService)
+        readonly ILinkService<PetMoreDetail> _linkService;
+        public PetOwnersController(IPetRegoService petRegoService, ILinkService<PetMoreDetail> linkService)
         {
             _petRegoService = petRegoService;
             _linkService = linkService;
@@ -26,7 +26,7 @@ namespace PetRego.Demo.V2.Controllers
             try
             {
                 var petOwner = _petRegoService.GetPetOwnerAndPetFoodDetail(id);
-                if (petOwner == default(PetOwner<PetDetail>)) return base.NotFound();
+                if (petOwner == default(PetOwner<PetMoreDetail>)) return base.NotFound();
                 var response = _linkService.GetLink(petOwner);
                 return Ok(response);
             }

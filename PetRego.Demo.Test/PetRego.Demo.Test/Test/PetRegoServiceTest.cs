@@ -17,7 +17,7 @@ namespace PetRego.Demo.Test
             var result = sut.GetPetOwnerAndPet(petOwnerId);
 
             //then
-            Assert.IsAssignableFrom<PetOwner<Pet>>(result);
+            Assert.IsAssignableFrom<PetOwner<PetBasicDetail>>(result);
         }
     }
 }
