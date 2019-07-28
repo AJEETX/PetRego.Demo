@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetRego.Demo.Domain;
 using PetRego.Demo.Model;
+using PetRego.Demo.Model.V2;
 
 namespace PetRego.Demo.Controllers
 {
     [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     [Route("api/[controller]")]
     public class PetOwnerController : Controller
     {
@@ -34,10 +34,20 @@ namespace PetRego.Demo.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetPetOwner"), MapToApiVersion("2.0")]
+        public IActionResult Get(int id)
         {
-            return "value";
+            try
+            {
+                var petOwner = _petRegoService.GetOwnerPetFoodingDetail(id);
+                if (petOwner == default(PetOwnerAndFooding)) return NotFound();
+                var response = _linkService.GetLink(petOwner);
+                return Ok(response);
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(500);//Shout//yell//log;
+            }
         }
     }
 }

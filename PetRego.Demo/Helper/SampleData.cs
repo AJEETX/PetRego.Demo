@@ -1,4 +1,5 @@
 ﻿using PetRego.Demo.Model;
+using PetRego.Demo.Model.V2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,21 @@ namespace PetRego.Demo.Helper
                 new PetOwner { Id = 5, Name = "Owner5" , Pets=new List<Pet>{ new Pet { Name="Bamba1", TypeOfPet=PetType.SNAKE},
                     new Pet { Name = "Pussy2", TypeOfPet=PetType.CAT } } }
             };
+            }
+        }
+        public static PetOwnerAndFooding GetPetOwnerAndFooding
+        {
+            get
+            {
+                return new PetOwnerAndFooding { Id=1, Name="Owner1",
+                    Pets =new List<PetDetail>
+                    {
+                        new PetDetail
+                        {
+                             Name="Doggy", FoodType=FoodType.Bones, TypeOfPet=PetType.DOG
+                        }
+                    }
+                };
             }
         }
     }
