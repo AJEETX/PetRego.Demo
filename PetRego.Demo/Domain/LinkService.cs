@@ -26,7 +26,15 @@ namespace PetRego.Demo.Domain
                 linksWrapper = new Link<PetOwner<T>>
                 {
                     Data = model,
-                    Links = GetLinks_Model(model)
+                    Links = new List<LinkInfo>
+                    {
+                        new LinkInfo
+                        {
+                            Href = _urlHelper.Link("GetPetOwner", new { id = model.Id }),
+                            Rel = "self",
+                            Method = "GET"
+                        }
+                    }
                 };
             }
             catch (Exception)
@@ -34,19 +42,6 @@ namespace PetRego.Demo.Domain
                 // shout //yell //log
             }
             return linksWrapper;
-        }
-        List<LinkInfo> GetLinks_Model(PetOwner<T> model)
-        {
-            var links = new List<LinkInfo>
-            {
-                new LinkInfo
-                {
-                    Href = _urlHelper.Link("GetPetOwner", new { id = model.Id }),
-                    Rel = "self",
-                    Method = "GET"
-                }
-            };
-            return links;
         }
     }
 }

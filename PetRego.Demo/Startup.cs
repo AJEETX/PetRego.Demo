@@ -24,7 +24,6 @@ namespace PetRego.Demo
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
         {
-
             app.UsePetRegoService(provider);
             app.UseMvc();
         }

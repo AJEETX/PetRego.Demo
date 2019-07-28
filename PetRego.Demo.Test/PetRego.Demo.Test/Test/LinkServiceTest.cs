@@ -3,18 +3,23 @@ using Moq;
 using PetRego.Demo.Domain;
 using PetRego.Demo.Test.FakeData;
 using PetRego.Demo.V1.Models;
+using System;
 using Xunit;
 
 namespace PetRego.Demo.Test
 {
-    public class LinkServiceTest
+    public class LinkServiceTest:IDisposable
     {
+        Mock<IUrlHelper> moqlUrlHelper;
+        public LinkServiceTest()
+        {
+            moqlUrlHelper = new Mock<IUrlHelper>();
+        }
         [Fact]
-        public void ToOutputModel_Links_returns_wrapper_links_successfully()
+        public void GetLink_with_valid_input_returns_wrapper_links_successfully()
         {
             //given
             var input = TestData.Owner;
-            var moqlUrlHelper = new Mock<IUrlHelper>();
             moqlUrlHelper.Setup(m => m.Link(It.IsAny<string>(), It.IsAny<object>())).Returns("TestUrl").Verifiable();
             var sut = new LinkService<PetBasicDetail>(moqlUrlHelper.Object);
 
@@ -22,23 +27,28 @@ namespace PetRego.Demo.Test
             var result = sut.GetLink(input);
 
             //then
+            Assert.NotNull(result);
             Assert.IsType<Link<PetOwner<PetBasicDetail>>>(result);
             moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(1));
         }
-        //[Fact]
-        //public void ToOutputModel_Links_returns_null()
-        //{
-        //    //given
-        //    List<Owner> input = null;
-        //    var moqlUrlHelper = new Mock<IUrlHelper>();
-        //    var sut = new LinkService(moqlUrlHelper.Object);
+        [Fact]
+        public void GetLink_with_valid_input_returns_null()
+        {
+            //given
+            PetOwner<PetBasicDetail> input = null;
+            var sut = new LinkService<PetBasicDetail>(moqlUrlHelper.Object);
 
-        //    //when
-        //    var result = sut.GetLinks(input);
+            //when
+            var result = sut.GetLink(input);
 
-        //    //then
-        //    Assert.Null(result);
-        //    moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(0));
-        //}
+            //then
+            Assert.Null(result);
+            moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(0));
+        }
+
+        public void Dispose()
+        {
+            moqlUrlHelper=null;
+        }
     }
 }

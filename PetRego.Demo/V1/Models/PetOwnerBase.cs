@@ -2,7 +2,7 @@
 
 namespace PetRego.Demo.V1.Models
 {
-    public class PetOwnerBase
+    public abstract class PetOwnerBase
     {
         public int Id { get; set; }
         [JsonProperty("petOwnerName")]
