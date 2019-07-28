@@ -1,5 +1,6 @@
-﻿using PetRego.Demo.Model;
-using PetRego.Demo.Model.V1;
+﻿using PetRego.Demo.Models;
+using PetRego.Demo.Models.V1;
+using PetRego.Demo.Models.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,18 +9,18 @@ namespace PetRego.Demo.Test.FakeData
 {
     static class TestData
     {
-        public static List<PetOwner> GetOwners
+        public static List<PetOwner<Pet>> GetOwners
         {
             get
             {
-                return new List<PetOwner> { Owner };
+                return new List<PetOwner<Pet>> { Owner };
             }
         }
-        public static PetOwner Owner
+        public static PetOwner<Pet> Owner
         {
             get
             {
-                return new PetOwner
+                return new PetOwner<Pet>
                 {
                     Id = 1,
                     Name = "Owner1",
@@ -56,14 +57,14 @@ namespace PetRego.Demo.Test.FakeData
         //        };
         //    }
         //}
-        public static Link<PetOwner> GetLinksWrapper
+        public static Link<PetOwner<Pet>> GetLinksWrapper
         {
             get
             {
-                return new Link<PetOwner>
+                return new Link<PetOwner<Pet>>
                 {
                     Links = new List<LinkInfo> { GetLinkInfo },
-                    PetOwner = GetOwnerModel
+                    Value = GetOwnerModel
                 };
             }
         }
@@ -74,11 +75,11 @@ namespace PetRego.Demo.Test.FakeData
                 return new LinkInfo { Href = "Href", Method = "Method", Rel = "Rel" };
             }
         }
-        public static PetOwner GetOwnerModel
+        public static PetOwner<Pet> GetOwnerModel
         {
             get
             {
-                return new PetOwner
+                return new PetOwner<Pet>
                 {
                     Name = "Owner1",
                     Pets = GetPets

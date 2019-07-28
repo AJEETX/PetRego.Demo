@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PetRego.Demo.Domain;
-using PetRego.Demo.Model;
-using PetRego.Demo.Model.V1;
+using PetRego.Demo.Models;
+using PetRego.Demo.Models.V1;
+using PetRego.Demo.Models.V2;
 using PetRego.Demo.Test.FakeData;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace PetRego.Demo.Test
             var result = sut.GetLink(input);
 
             //then
-            Assert.IsType<Link<PetOwner>>(result);
+            Assert.IsType<Link<PetOwner<Pet>>>(result);
             moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(1));
         }
         //[Fact]

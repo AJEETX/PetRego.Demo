@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 using PetRego.Demo.Domain;
+using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace PetRego.Demo.Helper
             services.AddSwaggerGen(options =>
             {
                 options.DescribeAllEnumsAsStrings();
+                options.OperationFilter<ExamplesOperationFilter>();
                 var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
                 foreach (var description in provider.ApiVersionDescriptions)
                     options.SwaggerDoc(description.GroupName, description.CreateInfoForApiVersion());

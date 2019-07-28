@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetRego.Demo.Model
+namespace PetRego.Demo.Models.V1
 {
     public class PetOwnerBase
     {
@@ -22,14 +22,13 @@ namespace PetRego.Demo.Model
         [JsonConverter(typeof(StringEnumConverter))]
         public PetType Type { get; set; }
     }
-
+    public class PetOwner<T> : PetOwnerBase
+    {
+        [JsonProperty("pets")]
+        public List<T> Pets { get; set; }
+    }
     public enum PetType
     {
         DOG, CAT, CHICKEN, SNAKE
-    }
-    public class PetOwner : PetOwnerBase
-    {
-        [JsonProperty("pets")]
-        public List<Pet> Pets { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using PetRego.Demo.Helper;
-using PetRego.Demo.Model;
-using PetRego.Demo.Model.V2;
+using PetRego.Demo.Models;
+using PetRego.Demo.Models.V1;
+using PetRego.Demo.Models.V2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,21 @@ namespace PetRego.Demo.Domain
 {
     public interface IPetRegoService
     {
-        IEnumerable<PetOwner> GetPetOwners();
+        PetOwner<Pet> GetPetOwnerAndPet(int id);
 
-        PetOwnerAndFooding GetOwnerPetFoodingDetail(int id);
+        PetOwner<PetDetail> GetPetOwnerAndPetFoodDetail(int id);
 
     }
     public class PetRegoService : IPetRegoService
     {
-        public PetOwnerAndFooding GetOwnerPetFoodingDetail(int id)
+        public PetOwner<Pet> GetPetOwnerAndPet(int id)
         {
-            return SampleData.GetPetOwnerAndFooding;
+            return Sample1Data.Owners.Where(o => o.Id == id).FirstOrDefault();
+        }
+        public PetOwner<PetDetail> GetPetOwnerAndPetFoodDetail(int id)
+        {
+            return Sample2Data.GetPetOwnerAndFooding;
         }
 
-        public IEnumerable<PetOwner> GetPetOwners()
-        {
-            return SampleData.Owners;
-        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PetRego.Demo.Model;
-using PetRego.Demo.Model.V1;
-using PetRego.Demo.Model.V2;
+using PetRego.Demo.Models;
+using PetRego.Demo.Models.V1;
+using PetRego.Demo.Models.V2;
 using System;
 using System.Collections.Generic;
 
@@ -9,8 +9,8 @@ namespace PetRego.Demo.Domain
 {
     public interface ILinkService
     {
-        Link<PetOwner> GetLink(PetOwner model);
-        Link<PetOwnerAndFooding> GetLink(PetOwnerAndFooding model);
+        Link<PetOwner<Pet>> GetLink(PetOwner<Pet> model);
+        Link<PetOwner<PetDetail>> GetLink(PetOwner<PetDetail> model);
 
     }
     public class LinkService : ILinkService
@@ -21,15 +21,15 @@ namespace PetRego.Demo.Domain
         {
             _urlHelper = urlHelper;
         }
-        public Link<PetOwner> GetLink(PetOwner model)
+        public Link<PetOwner<Pet>> GetLink(PetOwner<Pet> model)
         {
-            Link<PetOwner> linksWrapper = default(Link<PetOwner>);
-            if (model == default(PetOwner)) return linksWrapper;
+            Link<PetOwner<Pet>> linksWrapper = default(Link<PetOwner<Pet>>);
+            if (model == default(PetOwner<Pet>)) return linksWrapper;
             try
             {
-                linksWrapper = new Link<PetOwner>
+                linksWrapper = new Link<PetOwner<Pet>>
                 {
-                    PetOwner = model,
+                    Value = model,
                     Links = GetLinks_Model(model)
                 };
             }
@@ -40,16 +40,16 @@ namespace PetRego.Demo.Domain
             return linksWrapper;
         }
 
-        public Link<PetOwnerAndFooding> GetLink(PetOwnerAndFooding model)
+        public Link<PetOwner<PetDetail>> GetLink(PetOwner<PetDetail> model)
         {
 
-            Link<PetOwnerAndFooding> linksWrapper = default(Link<PetOwnerAndFooding>);
-            if (model == default(PetOwnerAndFooding)) return linksWrapper;
+            Link<PetOwner<PetDetail>> linksWrapper = default(Link<PetOwner<PetDetail>>);
+            if (model == default(PetOwner<PetDetail>)) return linksWrapper;
             try
             {
-                linksWrapper = new Link<PetOwnerAndFooding>
+                linksWrapper = new Link<PetOwner<PetDetail>>
                 {
-                    PetOwner = model,
+                    Value = model,
                     Links = GetLinks_Model(model)
                 };
             }
@@ -60,7 +60,7 @@ namespace PetRego.Demo.Domain
             return linksWrapper;
         }
 
-        List<LinkInfo> GetLinks_Model(PetOwner model)
+        List<LinkInfo> GetLinks_Model(PetOwner<Pet> model)
         {
             var links = new List<LinkInfo>
             {
@@ -73,7 +73,7 @@ namespace PetRego.Demo.Domain
             };
             return links;
         }
-        List<LinkInfo> GetLinks_Model(PetOwnerAndFooding model)
+        List<LinkInfo> GetLinks_Model(PetOwner<PetDetail> model)
         {
             var links = new List<LinkInfo>
             {

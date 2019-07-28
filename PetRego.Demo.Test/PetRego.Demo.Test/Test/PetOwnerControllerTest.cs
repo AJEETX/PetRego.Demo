@@ -1,13 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PetRego.Demo.Controllers;
+using PetRego.Demo.Controllers.V1;
 using PetRego.Demo.Domain;
 using PetRego.Demo.Helper;
-using PetRego.Demo.Model;
-using PetRego.Demo.Model.V1;
+using PetRego.Demo.Models;
+using PetRego.Demo.Models.V1;
+using PetRego.Demo.Models.V2;
 using PetRego.Demo.Test.FakeData;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace PetRego.Demo.Test
@@ -29,40 +32,42 @@ namespace PetRego.Demo.Test
         }
 
         [Fact]
-        public void GetPetOwners_returns_all_petOwners_details_successfully()
+        public void GetOwnerPet_returns_all_petOwner_pet_details_successfully()
         {
             //given
-            moqPetService.Setup(m => m.GetPetOwners()).Returns(SampleData.Owners);
-            moqLinkService.Setup(m => m.GetLink(It.IsAny<PetOwner>())).Returns(TestData.GetLinksWrapper);
+            int petOwnerId = 1;
+            moqPetService.Setup(m => m.GetPetOwnerAndPet(It.IsAny<int>())).Returns(Sample1Data.Owners.FirstOrDefault());
+            moqLinkService.Setup(m => m.GetLink(It.IsAny<PetOwner<Pet>>())).Returns(TestData.GetLinksWrapper);
             var sut = new PetOwnersController( moqPetService.Object, moqLinkService.Object);
 
             //when
-            var result = sut.Get();
+            var result = sut.GetOwnerPet(petOwnerId);
             OkObjectResult objectResult = result as OkObjectResult;
-            IEnumerable<Link<PetOwner>> owners = objectResult.Value as IEnumerable<Link<PetOwner>>;
+            Link<PetOwner<Pet>> owners = objectResult.Value as Link<PetOwner<Pet>>;
 
             //then
             Assert.NotNull(result);
             Assert.NotNull(objectResult);
             Assert.NotNull(owners);
-            moqPetService.Verify(v => v.GetPetOwners(), Times.Once);
+            moqPetService.Verify(v => v.GetPetOwnerAndPet(It.IsAny<int>()), Times.Once);
         }
         [Fact]
-        public void GetPetOwners_returns_all_petOwners_details_unsuccessfully_with_status_500()
+        public void GetOwnerPet_returns_all_petOwners_details_unsuccessfully_with_status_500()
         {
             //given
-            moqPetService.Setup(m => m.GetPetOwners()).Throws(new Exception());
+            int petOwnerId = 1;
+            moqPetService.Setup(m => m.GetPetOwnerAndPet(It.IsAny<int>())).Throws(new Exception());
             var sut = new PetOwnersController(moqPetService.Object, moqLinkService.Object);
 
             //when
-            var result = sut.Get();
+            var result = sut.GetOwnerPet(petOwnerId);
             StatusCodeResult objectResult = result as StatusCodeResult;
 
             //then
             Assert.NotNull(result);
             Assert.NotNull(objectResult);
             Assert.Equal(500, objectResult.StatusCode);
-            moqPetService.Verify(v => v.GetPetOwners(), Times.Once);
+            moqPetService.Verify(v => v.GetPetOwnerAndPet(It.IsAny<int>()), Times.Once);
         }
     }
 }

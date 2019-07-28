@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetRego.Demo.Model.V1
+namespace PetRego.Demo.Models.V1
 {
     public class LinkInfo
     {
@@ -13,7 +14,13 @@ namespace PetRego.Demo.Model.V1
     }
     public class Link<T>
     {
-        public T PetOwner { get; set; }
+        public T Value { get; set; }
         public List<LinkInfo> Links { get; set; }
+    }
+    public class ResponseModel : PetOwnerBase
+    {
+        public List<LinkInfo> Links { get; set; }
+        [JsonProperty("pets")]
+        public List<Pet> Pets { get; set; }
     }
 }
