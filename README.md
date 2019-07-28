@@ -8,7 +8,8 @@
 ---------------------------------------
 ###  API versioning, HATEOAS, Dependency Injection, Mocking
 
-demo: 
+#### Please see demo on the below link: 
+
 https://drive.google.com/file/d/1z4w-6jjJTK1syRq9NvVXyXQcY7AoYZxm/view
 
 #### Feature/ Function :
@@ -40,8 +41,8 @@ Snakes eat mice
 > 
 | # | application name   |   type  | description |
 | --- | --- | --- | ---|
-| a | PetRego.Demo   |    netcore2.0 api |  backend processing logic|
-|b| PetRego.Demo.Test  |  Test app  | User interactive application |
+| a | PetRego.Demo   |    netcore2.0 api |  rest api logic|
+|b| PetRego.Demo.Test  |  Test app  | test application |
 
 
 >  netcore2.0 api : please	install [![.Net Framework](https://img.shields.io/badge/DotNet-2.0-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.0)

@@ -11,11 +11,11 @@ using Xunit;
 
 namespace PetRego.Demo.Test
 {
-    public class PetOwnerControllerTest:IDisposable
+    public class PetOwnerControllerTestV1:IDisposable
     {
         Mock<IPetRegoService> moqPetService;
         Mock<ILinkService<PetBasicData>> moqLinkService;
-        public PetOwnerControllerTest()
+        public PetOwnerControllerTestV1()
         {
             moqPetService = new Mock<IPetRegoService>();
             moqLinkService = new Mock<ILinkService<PetBasicData>>();
@@ -44,6 +44,7 @@ namespace PetRego.Demo.Test
             //then
             Assert.NotNull(result);
             Assert.NotNull(objectResult);
+            Assert.Equal(200, objectResult.StatusCode);
             Assert.NotNull(owners);
             moqPetService.Verify(v => v.GetPetOwnerAndPet<PetBasicData>(It.IsAny<int>(),It.IsAny<int>()), Times.Once);
         }
@@ -82,6 +83,66 @@ namespace PetRego.Demo.Test
             Assert.NotNull(objectResult);
             Assert.Equal(404, objectResult.StatusCode);
             moqPetService.Verify(v => v.GetPetOwnerAndPet<PetBasicData>(It.IsAny<int>(), It.IsAny<int>()), Times.Once);
+        }
+        [Fact]
+        public void Post_with_valid_input_adds_petOwner_successfully()
+        {
+            //given
+            PetOwner<PetBasicData> input = TestData.Owner;
+            moqPetService.Setup(m => m.AddPetOwner<PetBasicData>(It.IsAny<int>(), It.IsAny<PetOwner<PetBasicData>>())).Verifiable();
+            var sut = new PetOwnersController(moqPetService.Object, moqLinkService.Object);
+
+            //when
+            var result = sut.Post(TestData.Owner);
+
+            //then
+            CreatedAtRouteResult objectResult = result as CreatedAtRouteResult;
+
+            //then
+            Assert.NotNull(result);
+            Assert.NotNull(objectResult);
+            Assert.Equal(201, objectResult.StatusCode);
+            moqPetService.Verify(v => v.AddPetOwner<PetBasicData>(It.IsAny<int>(), It.IsAny<PetOwner<PetBasicData>>()), Times.Once);
+        }
+        [Fact]
+        public void Post_with_invalid_input_returns_400()
+        {
+            //given
+            PetOwner<PetBasicData> input = default(PetOwner<PetBasicData>);
+            moqPetService.Setup(m => m.AddPetOwner<PetBasicData>(It.IsAny<int>(), It.IsAny<PetOwner<PetBasicData>>())).Verifiable();
+            var sut = new PetOwnersController(moqPetService.Object, moqLinkService.Object);
+
+            //when
+            var result = sut.Post(input);
+
+            //then
+            BadRequestResult objectResult = result as BadRequestResult;
+
+            //then
+            Assert.NotNull(result);
+            Assert.NotNull(objectResult);
+            Assert.Equal(400, objectResult.StatusCode);
+            moqPetService.Verify(v => v.AddPetOwner<PetBasicData>(It.IsAny<int>(), It.IsAny<PetOwner<PetBasicData>>()), Times.Never);
+        }
+        [Fact]
+        public void Post_when_throws_error_returns_500()
+        {
+            //given
+            PetOwner<PetBasicData> input = TestData.Owner;
+            moqPetService.Setup(m => m.AddPetOwner<PetBasicData>(It.IsAny<int>(), It.IsAny<PetOwner<PetBasicData>>())).Throws(new Exception());
+            var sut = new PetOwnersController(moqPetService.Object, moqLinkService.Object);
+
+            //when
+            var result = sut.Post(input);
+
+            //then
+            StatusCodeResult objectResult = result as StatusCodeResult;
+
+            //then
+            Assert.NotNull(result);
+            Assert.NotNull(objectResult);
+            Assert.Equal(500, objectResult.StatusCode);
+            moqPetService.Verify(v => v.AddPetOwner<PetBasicData>(It.IsAny<int>(), It.IsAny<PetOwner<PetBasicData>>()), Times.Once);
         }
     }
 }

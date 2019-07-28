@@ -1,4 +1,5 @@
 ﻿using PetRego.Demo.V1.Models;
+using PetRego.Demo.V2.Models;
 using System.Collections.Generic;
 
 namespace PetRego.Demo.Test.FakeData
@@ -31,6 +32,23 @@ namespace PetRego.Demo.Test.FakeData
                 return new List<PetBasicData> { Pet };
             }
         }
+        static List<PetDetailData> GetPetsDetail
+        {
+            get
+            {
+                return new List<PetDetailData> { PetDetail };
+            }
+        }
+        static PetDetailData PetDetail
+        {
+            get
+            {
+                return new PetDetailData
+                {
+                    Name = "Doggy"
+                };
+            }
+        }
         static PetBasicData Pet
         {
             get
@@ -52,6 +70,17 @@ namespace PetRego.Demo.Test.FakeData
                 };
             }
         }
+        public static Link<PetOwner<PetDetailData>> GetLinksDetailWrapper
+        {
+            get
+            {
+                return new Link<PetOwner<PetDetailData>>
+                {
+                    Links = new List<LinkInfo> { GetLinkInfo },
+                    Data = GetOwnerAdvanceModel
+                };
+            }
+        }
         static LinkInfo GetLinkInfo
         {
             get
@@ -67,6 +96,17 @@ namespace PetRego.Demo.Test.FakeData
                 {
                     Name = "Owner1",
                     Pets = GetPets
+                };
+            }
+        }
+        static PetOwner<PetDetailData> GetOwnerAdvanceModel
+        {
+            get
+            {
+                return new PetOwner<PetDetailData>
+                {
+                    Name = "Owner1",
+                    Pets = GetPetsDetail
                 };
             }
         }

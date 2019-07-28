@@ -26,8 +26,7 @@ namespace PetRego.Demo.Domain
             if (model == default(PetOwner<T>)) return;
             try
             {
-                var petOwners = dict[version].GetPetOwnerData<T>().ToList();
-                petOwners.Add(model);
+                dict[version].AddPetOwner<T>(model);
             }
             catch (Exception)
             {

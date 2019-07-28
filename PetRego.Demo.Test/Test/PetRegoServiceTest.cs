@@ -1,5 +1,6 @@
 using Moq;
 using PetRego.Demo.Domain;
+using PetRego.Demo.Test.FakeData;
 using PetRego.Demo.V1.Data;
 using PetRego.Demo.V1.Models;
 using PetRego.Demo.V2.Data;
@@ -69,6 +70,36 @@ namespace PetRego.Demo.Test
             //then
             Assert.Null(result);
             moqOwnerAndPetBasicData.Verify(v => v.GetPetOwnerData<PetBasicData>(), Times.Once);
+        }
+        [Fact]
+        public void AddPetOwnerAndPet_with_valid_input_adds_petOwner_successfully()
+        {
+            //given
+            int version = 1;
+
+            moqOwnerAndPetBasicData.Setup(m => m.AddPetOwner<PetBasicData>(It.IsAny<PetOwner<PetBasicData>>())).Verifiable();
+            var sut = new PetRegoService(moqOwnerAndPetBasicData.Object, moqOwnerAndPetDetailData.Object);
+
+            //when
+             sut.AddPetOwner(version, TestData.Owner);
+
+            //then
+            moqOwnerAndPetBasicData.Verify(v => v.AddPetOwner<PetBasicData>(It.IsAny<PetOwner<PetBasicData>>()), Times.Once);
+        }
+        [Fact]
+        public void AddPetOwnerAndPet_with_invalid_input_does_not_add_petOwner()
+        {
+            //given
+            int version = 1;
+            PetOwner<PetBasicData> input = default(PetOwner<PetBasicData>);
+            moqOwnerAndPetBasicData.Setup(m => m.AddPetOwner(It.IsAny<PetOwner<PetBasicData>>())).Verifiable();
+            var sut = new PetRegoService(moqOwnerAndPetBasicData.Object, moqOwnerAndPetDetailData.Object);
+
+            //when
+            sut.AddPetOwner(version, input);
+
+            //then
+            moqOwnerAndPetBasicData.Verify(v => v.AddPetOwner<PetBasicData>(It.IsAny<PetOwner<PetBasicData>>()), Times.Never);
         }
     }
 }
