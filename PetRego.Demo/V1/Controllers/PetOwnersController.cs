@@ -36,6 +36,7 @@ namespace PetRego.Demo.V1.Controllers
             }
         }
         [HttpPost(Name = "AddPetOwner")]
+        [Consumes("application/json")]
         public IActionResult Post([FromBody] PetOwner<PetBasicData> inputModel)
         {
             if (inputModel == default(PetOwner<PetBasicData>)) return BadRequest();

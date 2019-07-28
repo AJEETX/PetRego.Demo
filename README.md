@@ -8,6 +8,9 @@
 ---------------------------------------
 ###  API versioning, HATEOAS, Dependency Injection, Mocking
 
+demo: 
+https://drive.google.com/file/d/1z4w-6jjJTK1syRq9NvVXyXQcY7AoYZxm/view
+
 #### Feature/ Function :
 
 - Version 1 : 
@@ -69,7 +72,7 @@ keep coding  :)
 Having any trouble? Check out our [documentation](https://github.com/AJEETX/PetRego.Demo/blob/master/README.md) or [contact support](mailto:ajeetkumar@email.com) and we’ll help you sort it out.
 
 
-[![HitCount](http://hits.dwyl.io/ajeetx/PetRego.Demo/projects/2.svg)](http://hits.dwyl.io/ajeetx/PetRego.Demo/projects/2) | ![GitHub contributors](https://img.shields.io/github/contributors/ajeetx/PetRego.Demo.svg?style=plastic)|![license](https://img.shields.io/github/license/ajeetx/PetRego.Demo.svg?style=plastic)|
- | --- | --- | ---|
+ ![GitHub contributors](https://img.shields.io/github/contributors/ajeetx/PetRego.Demo.svg?style=plastic)|![license](https://img.shields.io/github/license/ajeetx/PetRego.Demo.svg?style=plastic)|
+ | --- | ---|
 
-
+ <a href="https://info.flagcounter.com/JC8k"><img src="https://s05.flagcounter.com/countxl/JC8k/bg_FFFFFF/txt_000000/border_CCCCCC/columns_8/maxflags_2/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
