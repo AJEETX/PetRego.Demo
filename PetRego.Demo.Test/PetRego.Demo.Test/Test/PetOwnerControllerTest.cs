@@ -34,7 +34,7 @@ namespace PetRego.Demo.Test
             //given
             moqPetService.Setup(m => m.GetPetOwners()).Returns(SampleData.Owners);
             moqLinkService.Setup(m => m.GetLink(It.IsAny<PetOwner>())).Returns(TestData.GetLinksWrapper);
-            var sut = new PetOwnerController( moqPetService.Object, moqLinkService.Object);
+            var sut = new PetOwnersController( moqPetService.Object, moqLinkService.Object);
 
             //when
             var result = sut.Get();
@@ -52,7 +52,7 @@ namespace PetRego.Demo.Test
         {
             //given
             moqPetService.Setup(m => m.GetPetOwners()).Throws(new Exception());
-            var sut = new PetOwnerController(moqPetService.Object, moqLinkService.Object);
+            var sut = new PetOwnersController(moqPetService.Object, moqLinkService.Object);
 
             //when
             var result = sut.Get();

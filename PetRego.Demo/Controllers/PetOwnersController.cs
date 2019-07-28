@@ -10,16 +10,16 @@ namespace PetRego.Demo.Controllers
     [ApiVersion("1.0")]
     [ApiVersion("2.0")]
     [Route("api/[controller]")]
-    public class PetOwnerController : Controller
+    public class PetOwnersController : Controller
     {
         readonly IPetRegoService _petRegoService;
         readonly ILinkService _linkService;
-        public PetOwnerController(IPetRegoService petRegoService,ILinkService linkService)
+        public PetOwnersController(IPetRegoService petRegoService,ILinkService linkService)
         {
             _petRegoService = petRegoService;
             _linkService = linkService;
         }
-        [HttpGet(Name = "GetPetOwners"), MapToApiVersion("1.0")]
+        [HttpGet(Name = "getPetOwners"), MapToApiVersion("1.0")]
         public IActionResult Get()
         {
             try
@@ -34,7 +34,7 @@ namespace PetRego.Demo.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "GetPetOwner"), MapToApiVersion("2.0")]
+        [HttpGet("{id}", Name = "getPetOwner"), MapToApiVersion("2.0")]
         public IActionResult Get(int id)
         {
             try

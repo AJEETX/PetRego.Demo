@@ -4,8 +4,6 @@ using PetRego.Demo.Model.V1;
 using PetRego.Demo.Model.V2;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PetRego.Demo.Domain
 {
@@ -31,11 +29,7 @@ namespace PetRego.Demo.Domain
             {
                 linksWrapper = new Link<PetOwner>
                 {
-                    PetOwner = new PetOwner
-                    {
-                        Name = model.Name,
-                        Pets = model.Pets
-                    },
+                    PetOwner = model,
                     Links = GetLinks_Model(model)
                 };
             }
@@ -55,11 +49,7 @@ namespace PetRego.Demo.Domain
             {
                 linksWrapper = new Link<PetOwnerAndFooding>
                 {
-                    PetOwner = new PetOwnerAndFooding
-                    {
-                        Name = model.Name,
-                        Pets = model.Pets
-                    },
+                    PetOwner = model,
                     Links = GetLinks_Model(model)
                 };
             }

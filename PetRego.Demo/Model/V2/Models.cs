@@ -16,7 +16,7 @@ namespace PetRego.Demo.Model.V2
     }
     public class PetOwnerAndFooding:PetOwnerBase
     {
-        [JsonProperty("Pets")]
+        [JsonProperty("pets")]
         public List<PetDetail> Pets { get; set; }
     }
     public enum FoodType

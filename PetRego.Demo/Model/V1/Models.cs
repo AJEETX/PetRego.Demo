@@ -11,7 +11,7 @@ namespace PetRego.Demo.Model
     public class PetOwnerBase
     {
         public int Id { get; set; }
-        [JsonProperty("Pet Owner name")]
+        [JsonProperty("petOwnerName")]
 
         public string Name { get; set; }
     }
@@ -20,7 +20,7 @@ namespace PetRego.Demo.Model
         public string Name { get; set; }
         [EnumDataType(typeof(PetType))]
         [JsonConverter(typeof(StringEnumConverter))]
-        public PetType TypeOfPet { get; set; }
+        public PetType Type { get; set; }
     }
 
     public enum PetType
@@ -29,7 +29,7 @@ namespace PetRego.Demo.Model
     }
     public class PetOwner : PetOwnerBase
     {
-        [JsonProperty("Pets")]
+        [JsonProperty("pets")]
         public List<Pet> Pets { get; set; }
     }
 }
