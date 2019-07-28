@@ -1,9 +1,5 @@
 using PetRego.Demo.Domain;
-using PetRego.Demo.Models;
-using PetRego.Demo.Models.V1;
-using PetRego.Demo.Models.V2;
-using System;
-using System.Collections.Generic;
+using PetRego.Demo.V1.Models;
 using Xunit;
 
 namespace PetRego.Demo.Test

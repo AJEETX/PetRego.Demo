@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PetRego.Demo.Models;
-using PetRego.Demo.Models.V1;
-using PetRego.Demo.Models.V2;
+using PetRego.Demo.V1.Models;
+using PetRego.Demo.V2.Models;
 using System;
 using System.Collections.Generic;
 

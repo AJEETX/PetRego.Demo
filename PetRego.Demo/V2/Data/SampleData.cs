@@ -1,14 +1,11 @@
-﻿using PetRego.Demo.Models.V1;
-using PetRego.Demo.Models.V2;
+﻿using PetRego.Demo.V1.Models;
+using PetRego.Demo.V2.Models;
 using Swashbuckle.AspNetCore.Examples;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PetRego.Demo.Helper
+namespace PetRego.Demo.V2.Data
 {
-    public class Sample2Data: IExamplesProvider
+    public class SampleData : IExamplesProvider
     {
         public static PetOwner<PetDetail> GetPetOwnerAndFooding
         {

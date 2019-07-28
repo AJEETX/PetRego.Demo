@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetRego.Demo.Helper
+namespace PetRego.Demo.Extension
 {
     public static class PetRegoExtensions
     {

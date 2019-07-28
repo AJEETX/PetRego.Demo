@@ -1,9 +1,5 @@
-﻿using PetRego.Demo.Models;
-using PetRego.Demo.Models.V1;
-using PetRego.Demo.Models.V2;
-using System;
+﻿using PetRego.Demo.V1.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PetRego.Demo.Test.FakeData
 {

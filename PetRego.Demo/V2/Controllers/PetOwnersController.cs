@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetRego.Demo.Domain;
-using PetRego.Demo.Helper;
-using PetRego.Demo.Models.V1;
-using PetRego.Demo.Models.V2;
+using PetRego.Demo.V1.Models;
+using PetRego.Demo.V2.Data;
+using PetRego.Demo.V2.Models;
 using Swashbuckle.AspNetCore.Examples;
 
-namespace PetRego.Demo.Controllers.V2
+namespace PetRego.Demo.V2.Controllers
 {
     [ApiVersion("2.0")]
     [Route("api/v{v:apiVersion}/[controller]")]
@@ -13,14 +13,14 @@ namespace PetRego.Demo.Controllers.V2
     {
         readonly IPetRegoService _petRegoService;
         readonly ILinkService _linkService;
-        public PetOwnersController(IPetRegoService petRegoService,ILinkService linkService)
+        public PetOwnersController(IPetRegoService petRegoService, ILinkService linkService)
         {
             _petRegoService = petRegoService;
             _linkService = linkService;
         }
 
         [HttpGet("{id}", Name = "getPetOwnerAndFood")]
-        [SwaggerResponseExample(200, typeof(Sample2Data))]
+        [SwaggerResponseExample(200, typeof(SampleData))]
         public IActionResult Get(int id)
         {
             try

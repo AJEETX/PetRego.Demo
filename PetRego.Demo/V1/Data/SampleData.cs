@@ -1,15 +1,10 @@
-﻿using PetRego.Demo.Models;
-using PetRego.Demo.Models.V1;
-using PetRego.Demo.Models.V2;
+﻿using PetRego.Demo.V1.Models;
 using Swashbuckle.AspNetCore.Examples;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PetRego.Demo.Helper
+namespace PetRego.Demo.V1.Data
 {
-    public class Sample1Data: IExamplesProvider
+    public class SampleData : IExamplesProvider
     {
         public static IEnumerable<PetOwner<Pet>> Owners
         {
@@ -29,7 +24,10 @@ namespace PetRego.Demo.Helper
 
         public object GetExamples()
         {
-            return Owners;
+            return new Link<PetOwner<Pet>> {
+                     Links=new List<LinkInfo>{ new LinkInfo { Href="endpoint", Method="http-method-name", Rel="self" } },
+                      Value=new PetOwner<Pet>{ Id=1, Name="Owner name", Pets=new List<Pet>{ new Pet { Name="Doggy", Type=PetType.DOG } } }
+            };
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using PetRego.Demo.Helper;
-using PetRego.Demo.Models;
-using PetRego.Demo.Models.V1;
-using PetRego.Demo.Models.V2;
-using System;
-using System.Collections.Generic;
+﻿using PetRego.Demo.V1.Data;
+using PetRego.Demo.V1.Models;
+using PetRego.Demo.V2.Data;
+using PetRego.Demo.V2.Models;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PetRego.Demo.Domain
 {
@@ -20,12 +17,11 @@ namespace PetRego.Demo.Domain
     {
         public PetOwner<Pet> GetPetOwnerAndPet(int id)
         {
-            return Sample1Data.Owners.Where(o => o.Id == id).FirstOrDefault();
+            return V1.Data.SampleData.Owners.Where(o => o.Id == id).FirstOrDefault();
         }
         public PetOwner<PetDetail> GetPetOwnerAndPetFoodDetail(int id)
         {
-            return Sample2Data.GetPetOwnerAndFooding;
+            return V2.Data.SampleData.GetPetOwnerAndFooding;
         }
-
     }
 }
