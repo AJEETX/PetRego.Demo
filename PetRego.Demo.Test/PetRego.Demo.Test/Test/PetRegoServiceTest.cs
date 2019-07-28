@@ -29,7 +29,7 @@ namespace PetRego.Demo.Test
         {
             //given
             int version=1, petOwnerId = 1;
-            moqOwnerAndPetBasicData.Setup(m => m.GetData<PetBasicData>()).Returns(FakeData.TestData.GetOwners);
+            moqOwnerAndPetBasicData.Setup(m => m.GetPetOwnerData<PetBasicData>()).Returns(FakeData.TestData.GetOwners);
             var sut = new PetRegoService(moqOwnerAndPetBasicData.Object,moqOwnerAndPetDetailData.Object);
 
             //when
@@ -38,7 +38,7 @@ namespace PetRego.Demo.Test
             //then
             Assert.NotNull(result);
             Assert.IsAssignableFrom<PetOwner<PetBasicData>>(result);
-            moqOwnerAndPetBasicData.Verify(v => v.GetData<PetBasicData>(), Times.Once);
+            moqOwnerAndPetBasicData.Verify(v => v.GetPetOwnerData<PetBasicData>(), Times.Once);
         }
         [Theory]
         [InlineData(1,0)]
@@ -53,14 +53,14 @@ namespace PetRego.Demo.Test
 
             //then
             Assert.Null(result);
-            moqOwnerAndPetBasicData.Verify(v => v.GetData<PetBasicData>(), Times.Never);
+            moqOwnerAndPetBasicData.Verify(v => v.GetPetOwnerData<PetBasicData>(), Times.Never);
         }
         [Fact]
         public void GetPetOwnerAndPet_with_valid_input_on_error_returns_null()
         {
             //given
             int version = 1, petOwnerId = 1;
-            moqOwnerAndPetBasicData.Setup(m => m.GetData<PetBasicData>()).Throws(new Exception());
+            moqOwnerAndPetBasicData.Setup(m => m.GetPetOwnerData<PetBasicData>()).Throws(new Exception());
             var sut = new PetRegoService(moqOwnerAndPetBasicData.Object, moqOwnerAndPetDetailData.Object);
 
             //when
@@ -68,7 +68,7 @@ namespace PetRego.Demo.Test
 
             //then
             Assert.Null(result);
-            moqOwnerAndPetBasicData.Verify(v => v.GetData<PetBasicData>(), Times.Once);
+            moqOwnerAndPetBasicData.Verify(v => v.GetPetOwnerData<PetBasicData>(), Times.Once);
         }
     }
 }

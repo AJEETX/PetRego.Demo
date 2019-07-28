@@ -9,11 +9,12 @@ namespace PetRego.Demo.V2.Data
     public interface IOwnerAndPetDetailData : IOwnerAndPetData { }
     public class OwnerAndPetDetailData : IExamplesProvider, IOwnerAndPetDetailData
     {
+        static List<PetOwner<PetDetailData>> PetOwners;
         public static List<PetOwner<PetDetailData>> Owners
         {
             get
             {
-                return new List<PetOwner<PetDetailData>> {
+                PetOwners= new List<PetOwner<PetDetailData>> {
                     new PetOwner<PetDetailData>{
                          Id=1, Name="Owner1", Pets=new List<PetDetailData>{ new PetDetailData {  Name="Pussy1", Type=PetType.CAT, FoodType=FoodType.Fish},
                              new PetDetailData { Name = "Python", Type = PetType.SNAKE, FoodType = FoodType.Mice } }
@@ -33,10 +34,11 @@ namespace PetRego.Demo.V2.Data
                          Id=5, Name="Owner5", Pets=new List<PetDetailData>{ new PetDetailData {  Name="Pussy1", Type=PetType.CAT, FoodType=FoodType.Fish} }
                     }
                 };
+                return PetOwners;
             }
         }
 
-        public IEnumerable<PetOwner<T>> GetData<T>()
+        public IEnumerable<PetOwner<T>> GetPetOwnerData<T>()
         {
             return Owners as IEnumerable<PetOwner<T>>;
         }
@@ -58,6 +60,11 @@ namespace PetRego.Demo.V2.Data
                     }
                 }
             };
+        }
+
+        public void AddPetOwner<T>(PetOwner<T> petOwner)
+        {
+            PetOwners.Add(petOwner as PetOwner<PetDetailData>);
         }
     }
 }

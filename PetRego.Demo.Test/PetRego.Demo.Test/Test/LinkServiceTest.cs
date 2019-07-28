@@ -29,7 +29,7 @@ namespace PetRego.Demo.Test
             //then
             Assert.NotNull(result);
             Assert.IsType<Link<PetOwner<PetBasicData>>>(result);
-            moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(1));
+            moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.AtLeast(1));
         }
         [Fact]
         public void GetLink_with_invalid_input_returns_null()
@@ -58,7 +58,7 @@ namespace PetRego.Demo.Test
 
             //then
             Assert.Null(result);
-            moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(1));
+            moqlUrlHelper.Verify(v => v.Link(It.IsAny<string>(), It.IsAny<object>()), Times.AtLeast(1));
         }
         public void Dispose()
         {

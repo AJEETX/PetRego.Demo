@@ -33,6 +33,24 @@ namespace PetRego.Demo.Domain
                             Href = _urlHelper.Link("GetPetOwner", new { id = model.Id }),
                             Rel = "self",
                             Method = "GET"
+                        },
+                        new LinkInfo
+                        {
+                            Href = _urlHelper.Link("AddPetOwner", new { }),
+                            Rel = "add-petOwner",
+                            Method = "POST"
+                        },
+                        new LinkInfo
+                        {
+                            Href = _urlHelper.Link("UpdatePetOwner", new { id = model.Id }),
+                            Rel = "update-petOwner",
+                            Method = "PUT"
+                        },
+                        new LinkInfo
+                        {
+                            Href = _urlHelper.Link("DeletePetOwner", new { id = model.Id }),
+                            Rel = "delete-petOwner",
+                            Method = "DELETE"
                         }
                     }
                 };

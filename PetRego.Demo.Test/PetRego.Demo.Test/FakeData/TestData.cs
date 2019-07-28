@@ -24,14 +24,14 @@ namespace PetRego.Demo.Test.FakeData
                 };
             }
         }
-        public static List<PetBasicData> GetPets
+        static List<PetBasicData> GetPets
         {
             get
             {
                 return new List<PetBasicData> { Pet };
             }
         }
-        public static PetBasicData Pet
+        static PetBasicData Pet
         {
             get
             {
@@ -41,18 +41,6 @@ namespace PetRego.Demo.Test.FakeData
                 };
             }
         }
-        //public static Links<PetOwner> GetLinksWrapperList
-        //{
-        //    get
-        //    {
-        //        return new Links<PetOwner>
-        //        {
-        //            LinkList = new List<LinkInfo> { GetLinkInfo },
-        //            PetOwners = new List<Link<PetOwner>> {
-        //                GetLinksWrapper }
-        //        };
-        //    }
-        //}
         public static Link<PetOwner<PetBasicData>> GetLinksWrapper
         {
             get
@@ -71,7 +59,7 @@ namespace PetRego.Demo.Test.FakeData
                 return new LinkInfo { Href = "Href", Method = "Method", Rel = "Rel" };
             }
         }
-        public static PetOwner<PetBasicData> GetOwnerModel
+        static PetOwner<PetBasicData> GetOwnerModel
         {
             get
             {
