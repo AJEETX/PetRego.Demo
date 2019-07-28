@@ -4,10 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PetRego.Demo.Helper;
 
 namespace PetRego.Demo
 {
@@ -20,19 +26,33 @@ namespace PetRego.Demo
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddScoped<IUrlHelper>(factory => new UrlHelper(factory.GetService<IActionContextAccessor>().ActionContext));
+            services.AddApiVersioning(o => {
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1, 0);
+                o.ApiVersionReader = new HeaderApiVersionReader("version");
+            });
+            services.AddMvcCore().AddVersionedApiExplorer(options => options.SubstituteApiVersionInUrl = true);
+            services.AddSwaggerGen(options =>
+            {
+                options.DescribeAllEnumsAsStrings();
+                var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
+                foreach (var description in provider.ApiVersionDescriptions)
+                    options.SwaggerDoc(description.GroupName, description.CreateInfoForApiVersion());
+            });
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApiVersionDescriptionProvider provider)
         {
-            if (env.IsDevelopment())
+            app.UseMvc().UseSwagger().UseSwaggerUI(options =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                foreach (var description in provider.ApiVersionDescriptions)
+                    options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", "Version " + description.GroupName.ToUpperInvariant());
+            });
 
             app.UseMvc();
         }
