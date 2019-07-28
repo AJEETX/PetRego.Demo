@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PetRego.Demo.V1.Models
 {
-    public class PetBasicDetail
+    public class PetBasicData
     {
         public string Name { get; set; }
         [EnumDataType(typeof(PetType))]

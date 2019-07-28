@@ -11,20 +11,20 @@ namespace PetRego.Demo.V1.Controllers
     public class PetOwnersController : Controller
     {
         readonly IPetRegoService _petRegoService;
-        readonly ILinkService<PetBasicDetail> _linkService;
-        public PetOwnersController(IPetRegoService petRegoService, ILinkService<PetBasicDetail> linkService)
+        readonly ILinkService<PetBasicData> _linkService;
+        public PetOwnersController(IPetRegoService petRegoService, ILinkService<PetBasicData> linkService)
         {
             _petRegoService = petRegoService;
             _linkService = linkService;
         }
         [HttpGet("{id}", Name = "getPetOwner")]
-        [SwaggerResponseExample(200, typeof(SampleData))]
+        [SwaggerResponseExample(200, typeof(OwnerAndPetBasicData))]
         public IActionResult Get(int id)
         {
             try
             {
-                PetOwner<PetBasicDetail> petOwner = _petRegoService.GetPetOwnerAndPet(id);
-                if (petOwner == default(PetOwner<PetBasicDetail>)) return base.NotFound();
+                PetOwner<PetBasicData> petOwner = _petRegoService.GetPetOwnerAndPet<PetBasicData>(1,id);
+                if (petOwner == default(PetOwner<PetBasicData>)) return base.NotFound();
                 var response = _linkService.GetLink(petOwner);
                 return Ok(response);
             }

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using PetRego.Demo.Domain;
+using PetRego.Demo.V1.Data;
+using PetRego.Demo.V2.Data;
 using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -35,6 +37,8 @@ namespace PetRego.Demo.Extension
         public static IServiceCollection AddPetRegoService(this IServiceCollection services)
         {
             services.AddScoped<IPetRegoService, PetRegoService>();
+            services.AddScoped<IOwnerAndPetBasicData, OwnerAndPetBasicData>();
+            services.AddScoped<IOwnerAndPetDetailData, OwnerAndPetDetailData>();
             services.AddScoped(typeof(ILinkService<>),typeof(LinkService<>));
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory => new UrlHelper(factory.GetService<IActionContextAccessor>().ActionContext));

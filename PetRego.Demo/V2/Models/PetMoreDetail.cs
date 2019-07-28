@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PetRego.Demo.V2.Models
 {
-    public class PetMoreDetail : PetBasicDetail
+    public class PetDetailData : PetBasicData
     {
         [EnumDataType(typeof(FoodType))]
         [JsonConverter(typeof(StringEnumConverter))]
