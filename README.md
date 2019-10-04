@@ -17,13 +17,13 @@
 - Version 1 : 
 ```
 A REST API that allows it to maintain a list of owners, their pets, and attributes. 
+The most common request will be to look up the pets that belong to a person.
 
 - Their details are: 
 The owner's name 
 The pet's name 
 The type of animal (we particularly care about dogs, cats, chickens and snakes). 
- 
-In version 1, The most common request will be to look up the pets that belong to a person. `
+  `
 ```
 - Version 2:
 ```
@@ -35,7 +35,7 @@ Snakes eat mice
 ```
 ### Steps to install and setup
 
-> Kindly close/download the repository to an empty folder location on the local drive of your computer.
+> Kindly clone/download the repository to an empty folder location on the local drive of your computer.
 
 > There are 2 projects in the repository: 
 > 
