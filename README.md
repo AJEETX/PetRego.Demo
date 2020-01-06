@@ -1,4 +1,4 @@
-# PetRego.Demo   ![GitHub release](https://img.shields.io/github/release/ajeetx/PetRego.Demo.svg?style=for-the-badge) ![Maintenance](https://img.shields.io/maintenance/yes/2019.svg?style=for-the-badge)
+# PetRego.Demo   ![GitHub release](https://img.shields.io/github/release/ajeetx/PetRego.Demo.svg?style=for-the-badge) ![Maintenance](https://img.shields.io/maintenance/yes/2020.svg?style=for-the-badge)
 
 | ![GitHub Release Date](https://img.shields.io/github/release-date/ajeetx/PetRego.Demo.svg?style=plastic) |[![.Net Framework](https://img.shields.io/badge/DotNet-2.0-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.0) | ![GitHub language count](https://img.shields.io/github/languages/count/ajeetx/PetRego.Demo.svg?style=plastic)| ![GitHub top language](https://img.shields.io/github/languages/top/ajeetx/PetRego.Demo.svg) |![GitHub repo size in bytes](https://img.shields.io/github/repo-size/ajeetx/PetRego.Demo.svg) 
 | ---          | ---        | ---      | ---       | --- |
